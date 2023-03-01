@@ -10,7 +10,7 @@ const getAllProducts = asyncwrapper(async (req, res) => {
     const {id:productID} = req.params
     const product = await Product.findOne({_id: productID})
     if(!product) {
-        return new Error(`No product with id: ${productID}`)
+        return res.status(404).json({msg:`No product with id: ${productID}`})
     }
     res.status(200).json({product})
  })
@@ -24,7 +24,7 @@ const getAllProducts = asyncwrapper(async (req, res) => {
     const {id:productID} = req.params
     const product = await Product.findOneAndDelete({_id:productID})
     if(!product) {
-        return new Error(`No product with id: ${productID}`, 404)
+        return res.status(404).json({msg:`No product with id: ${productID}`})
     }
     res.status(200).json({task: null, status: 'success'})
  })
@@ -36,7 +36,7 @@ const getAllProducts = asyncwrapper(async (req, res) => {
         runValidators:true,
     })
     if(!product) {
-        return new Error(`No product with id: ${productID}`, 404)
+        return res.status(404).json({msg:`No product with id: ${productID}`})
     }
     res.status(200).json({product})
  })

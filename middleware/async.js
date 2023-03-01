@@ -3,7 +3,8 @@ const asyncwrapper = (fn) => {
         try {
             await fn(req,res)
         } catch (error) {
-            next(error)
+            res.status(500).json({msg: error})
+            next()
         }
     }
 }
