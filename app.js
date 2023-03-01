@@ -6,10 +6,13 @@ const mongoose = require('mongoose')
 const app = express()
 
 const connectDB = require('./db/connect')
+const products = require('./routes/products')
 
 app.use(express.json())
 
 const PORT = process.env.PORT || 3000
+
+app.use('/api/v1/products', products)
 
 const start = async () => {
     try {
